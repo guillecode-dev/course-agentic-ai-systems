@@ -1,0 +1,12 @@
+{
+    "name": "Agent 01 - Basic",
+    "build": { "dockerfile": "Dockerfile" },
+    "workspaceFolder": "/workspace",
+    "customizations": {
+      "vscode": {
+        "extensions": ["ms-python.python","ms-toolsai.jupyter"]
+      }
+    },
+    "postCreateCommand": "python -m pip install --upgrade pip && pip install -r requirements.txt || true"
+  }
+  
