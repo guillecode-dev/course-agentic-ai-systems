@@ -1,13 +1,26 @@
 import os
-from langchain_openai import OpenAI
+from dotenv import load_dotenv
+import openai
 
-os.environ["OPENAI_API_KEY"] = (
-    "***REMOVED***"
+# Cargar .env
+load_dotenv()
+
+api_key = os.getenv("OPENAI_API_KEY")
+project_id = os.getenv("OPENAI_API_PROJECT_ID")
+
+openai.api_key = api_key
+openai.api_base = os.getenv("OPENAI_API_BASE")
+
+# Usando la nueva API de completions
+response = openai.chat.completions.create(
+    model="gpt-5-mini",
+    messages=[
+        {"role": "system", "content": "Eres un asistente útil."},
+        {
+            "role": "user",
+            "content": "Di 'hola mundo desde OpenAI' en el idioma de tu preferencia y a continuación indica en español en qué idioma fue el saludo",
+        },
+    ],
 )
 
-
-llm = OpenAI(temperature=0.9)  # 0 is less creativity, 1 is maximum creativity
-
-prompt = "Di 'hola mundo desde langchain' en el idioma de tu preferencia, y luego dime, en español, en qué idioma fue el saludo"
-
-print(llm.invoke(prompt))  
+print(response.choices[0].message.content.strip())
