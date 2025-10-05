@@ -1,4 +1,6 @@
 langchain
 langchain-openai
+langchain-google-genai
 openai
+google-generativeai
 python-dotenv
